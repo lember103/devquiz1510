@@ -13,3 +13,10 @@ export function addQuestion(newQuestion) {
     .then(response => response.data)
     .catch(console.error)
 }
+
+export function getQuestion(){
+  return axios
+      .get('/api/question/play')
+      .then(response => response.data)
+      .catch(console.error)
+}

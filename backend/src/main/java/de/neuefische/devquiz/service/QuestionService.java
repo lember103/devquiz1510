@@ -37,4 +37,9 @@ public class QuestionService {
 
         return optionalQuestion.get();
     }
+
+    public Question getQuestion() {
+        List<Question> allQuestions = questionRepo.findAll();
+        return allQuestions.get(0);
+    }
 }

@@ -2,19 +2,20 @@ import * as React from 'react'
 import Answer from './Answer'
 import styled from 'styled-components'
 
-function Question({ question }) {
-  return (
-    <QuestionContainer>
-      <h3>{question.questionText}</h3>
-      <AnswerContainer>
-        {question.answers.map(answer => (
-          <Answer answer={answer} key={answer.id} questionId={question.id} />
-        ))}
-      </AnswerContainer>
-      <CheckButton>Check Answer</CheckButton>
-    </QuestionContainer>
-  )
+function Question({question}) {
+    return (
+        <QuestionContainer>
+            <h3>{question.questionText}</h3>
+            <AnswerContainer>
+                {question.answers.map(answer => (
+                    <Answer answer={answer} key={answer.id} questionId={question.id}/>
+                ))}
+            </AnswerContainer>
+            <CheckButton>Check Answer</CheckButton>
+        </QuestionContainer>
+    )
 }
+
 export default Question
 
 const QuestionContainer = styled.section`
@@ -54,6 +55,7 @@ const CheckButton = styled.button`
     background-color: #dfdfdf;
     color: #757780;
   }
+
   &:active {
     position: relative;
     top: 1px;

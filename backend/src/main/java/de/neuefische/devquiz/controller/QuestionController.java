@@ -30,6 +30,11 @@ public class QuestionController {
         return questionService.get(id);
     }
 
+    @GetMapping("/play")
+    public Question getQuestion(){
+        return questionService.getQuestion();
+    }
+
     @PostMapping()
     public Question addQuestion(@RequestBody Question newQuestion) {
         return questionService.addQuestion(newQuestion);
