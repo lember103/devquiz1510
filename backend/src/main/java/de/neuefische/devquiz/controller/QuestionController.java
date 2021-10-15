@@ -22,6 +22,7 @@ public class QuestionController {
     @GetMapping()
     public List<Question> listQuestion() {
         return questionService.getAllQuestions();
+        // hallo
     }
 
     @GetMapping("/{id}")
