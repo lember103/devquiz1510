@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import Question from "../components/Question";
 import * as React from "react";
+import * as PropTypes from "prop-types";
+
+Play.propTypes = {
+    question: PropTypes.object
+}
 
 export default function Play({question}){
 

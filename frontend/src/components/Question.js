@@ -4,9 +4,9 @@ import styled from 'styled-components'
 
 function Question({question}) {
 
-    if (question === undefined) {
+    /*if (question === undefined) {
         return <div>Keine Fragen vorhanden!</div>
-    } else {
+    } else {*/
         return (
             <QuestionContainer>
 
@@ -19,7 +19,7 @@ function Question({question}) {
                 <CheckButton>Check Answer</CheckButton>
             </QuestionContainer>
         )
-    }
+    //}
 }
 
 export default Question
