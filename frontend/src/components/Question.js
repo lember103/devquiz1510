@@ -1,25 +1,35 @@
 import * as React from 'react'
 import Answer from './Answer'
 import styled from 'styled-components'
+import {useState} from "react";
 
-function Question({question}) {
+function Question({question, checkIfCorrect}) {
 
-    /*if (question === undefined) {
-        return <div>Keine Fragen vorhanden!</div>
-    } else {*/
-        return (
-            <QuestionContainer>
+    const [chosenId, setChosenId] = useState("123456")
 
+    const handleClick = event => {
+        event.preventDefault()
+        console.log("Checking if correct...:)")
+        console.log("Question : " +JSON.stringify(question))
+        checkIfCorrect(question, chosenId)
+    }
+
+    const sendChosenID = (id) => {setChosenId(id)}
+    console.log("chosenId: " +chosenId )
+
+    return (
+        <QuestionContainer>
+            <form onSubmit={handleClick}>
                 <h3>{question.questionText}</h3>
                 <AnswerContainer>
                     {question.answers.map(answer => (
-                        <Answer answer={answer} key={answer.id} questionId={question.id}/>
+                        <Answer answer={answer} key={answer.id} questionId={question.id} sendChosenID={sendChosenID} />
                     ))}
                 </AnswerContainer>
                 <CheckButton>Check Answer</CheckButton>
-            </QuestionContainer>
-        )
-    //}
+            </form>
+        </QuestionContainer>
+    )
 }
 
 export default Question
@@ -37,13 +47,13 @@ const AnswerContainer = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 0px 0px;
+  gap: 0 0;
   grid-template-areas:
     '. .'
     '. .';
 `
 const CheckButton = styled.button`
-  box-shadow: inset 0px 1px 0px 0px #ffffff;
+  box-shadow: inset 0 1px 0 0 #ffffff;
   background-color: #757780;
   border-radius: 6px;
   border: 1px solid #dcdcdc;

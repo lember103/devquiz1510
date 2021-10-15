@@ -8,7 +8,6 @@ export function getQuestions() {
 }
 
 export function addQuestion(newQuestion) {
-  console.log(newQuestion)
   return axios
     .post('/api/question', newQuestion)
     .then(response => response.data)
@@ -18,6 +17,18 @@ export function addQuestion(newQuestion) {
 export function getQuestion(){
   return axios
       .get('/api/question/play')
+      .then(response => response.data)
+      .catch(console.error)
+}
+export function checkAnswer(question, chosenId){
+
+  const tryFrontend = {
+    question : question,
+    chosenId : chosenId
+  }
+
+  return axios
+      .post('/api/question/play', tryFrontend )
       .then(response => response.data)
       .catch(console.error)
 }
