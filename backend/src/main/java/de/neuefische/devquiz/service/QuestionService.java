@@ -24,6 +24,7 @@ public class QuestionService {
     }
 
     public Question addQuestion(Question newQuestion){
+        System.out.println(newQuestion);
         return questionRepo.save(newQuestion);
     }
 

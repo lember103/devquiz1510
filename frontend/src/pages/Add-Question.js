@@ -63,6 +63,7 @@ export default function AddQuestion({ saveQuestion }) {
         <Button onClick={createNewAnswerOption}>Create Answeroption</Button>
         <Button
           onClick={() => {
+            console.log((question))
             saveQuestion(question)
           }}
         >

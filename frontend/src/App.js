@@ -26,7 +26,10 @@ function App() {
                     <AddQuestion saveQuestion={saveQuestion}/>
                 </Route>
                 <Route path="/play">
-                    {playQuestion && <Play question={playQuestion}/>}
+                    {/*{console.log(playQuestion)}
+                    {playQuestion && <Play question={playQuestion}/>}*/}
+                    {console.log(questions[7])}
+                    {questions && <Play question={questions[2]}/>}
                 </Route>
             </Switch>
         </div>

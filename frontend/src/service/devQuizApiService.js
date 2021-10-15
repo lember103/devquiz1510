@@ -8,6 +8,7 @@ export function getQuestions() {
 }
 
 export function addQuestion(newQuestion) {
+  console.log(newQuestion)
   return axios
     .post('/api/question', newQuestion)
     .then(response => response.data)
