@@ -3,17 +3,23 @@ import Answer from './Answer'
 import styled from 'styled-components'
 
 function Question({question}) {
-    return (
-        <QuestionContainer>
-            <h3>{question.questionText}</h3>
-            <AnswerContainer>
-                {question.answers.map(answer => (
-                    <Answer answer={answer} key={answer.id} questionId={question.id}/>
-                ))}
-            </AnswerContainer>
-            <CheckButton>Check Answer</CheckButton>
-        </QuestionContainer>
-    )
+
+    if (question === undefined) {
+        return <div>Keine Fragen vorhanden!</div>
+    } else {
+        return (
+            <QuestionContainer>
+
+                <h3>{question.questionText}</h3>
+                <AnswerContainer>
+                    {question.answers.map(answer => (
+                        <Answer answer={answer} key={answer.id} questionId={question.id}/>
+                    ))}
+                </AnswerContainer>
+                <CheckButton>Check Answer</CheckButton>
+            </QuestionContainer>
+        )
+    }
 }
 
 export default Question
