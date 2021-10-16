@@ -5,7 +5,7 @@ import {useState} from "react";
 
 function Question({question, checkIfCorrect, answerIsCorrect, playNext, resetAnswers}) {
 
-    const [chosenId, setChosenId] = useState("123456")
+    const [chosenId, setChosenId] = useState("123456789")
 
     const handleClick = event => {
         event.preventDefault()

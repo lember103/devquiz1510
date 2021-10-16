@@ -22,7 +22,6 @@ public class QuestionController {
     @GetMapping()
     public List<Question> listQuestion() {
         return questionService.getAllQuestions();
-        // hallo
     }
 
     @GetMapping("/{id}")
@@ -36,13 +35,5 @@ public class QuestionController {
         return questionService.addQuestion(newQuestion);
     }
 
-    @GetMapping("/play")
-    public Question getQuestion() {
-        return questionService.getQuestion();
-    }
 
-    @PostMapping("/play")
-    public boolean checkAnswer(@RequestBody FrontendTry frontendTry) {
-        return questionService.checkAnswer(frontendTry);
-    }
 }
