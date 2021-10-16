@@ -12,7 +12,7 @@ function Question({question, checkIfCorrect, answerIsCorrect, playNext, resetAns
         checkIfCorrect(question, chosenId)
     }
 
-    const sendChosenID = (id) => {
+    const sendChosenId = (id) => {
         setChosenId(id)
     }
 
@@ -27,7 +27,7 @@ function Question({question, checkIfCorrect, answerIsCorrect, playNext, resetAns
                 <h3>{question.questionText}</h3>
                 <AnswerContainer>
                     {question.answers.map(answer => (
-                        <Answer answer={answer} key={answer.id} questionId={question.id} sendChosenID={sendChosenID}/>
+                        <Answer answer={answer} key={answer.id} questionId={question.id} sendChosenId={sendChosenId}/>
                     ))}
 
                     {answerIsCorrect === undefined ? <div>Please chose an answer...</div> :

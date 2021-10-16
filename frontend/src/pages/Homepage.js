@@ -1,12 +1,16 @@
 import * as React from 'react'
 import Question from '../components/Question'
 import styled from 'styled-components'
+import QuestionLight from "../components/QuestionLight";
 
 function Homepage({ questions }) {
+
+  const sendChosenId = () => {}
+
   return (
     <QuestionsContainer>
       {questions.map(question => (
-        <Question question={question} key={question.id} />
+        <QuestionLight question={question} key={question.id} sendChosenId={sendChosenId} />
       ))}
     </QuestionsContainer>
   )
