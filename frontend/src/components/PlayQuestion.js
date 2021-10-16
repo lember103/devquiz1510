@@ -3,15 +3,16 @@ import {useState} from "react";
 
 export default function PlayQuestion(props) {
 
-    const [question, setQuestion] = useState()
+    const [correctAnswerText, setCorrectAnswerText] = useState()
 
     const handleCheckButtonClick = () => {
         getQuestionById(props.playQuestion.id)
-            .then(response => {
-                setQuestion(response)
-                console.log(response)
+            .then(question => {
+                setCorrectAnswerText(question.answers.filter(answer => answer.isCorrect === true)[0].answerText)
             })
     }
+
+
 
     return (
         <>
@@ -24,6 +25,7 @@ export default function PlayQuestion(props) {
                 )
             )}
             <button onClick={handleCheckButtonClick}>Check Answer</button>
+            {correctAnswerText && <h3>{correctAnswerText}</h3>}
         </>
     )
 }
