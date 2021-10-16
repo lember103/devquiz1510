@@ -3,21 +3,26 @@ import Question from "../components/Question";
 import * as React from "react";
 import * as PropTypes from "prop-types";
 import {checkAnswer} from "../service/devQuizApiService";
+import {useState} from "react";
 
 Play.propTypes = {
     question: PropTypes.object
 }
 
+export default function Play({question, playNext}) {
+
+const [answerIsCorrect, setAnswerIsCorrect] = useState();
+
+const resetAnswers = () => setAnswerIsCorrect();
+
 const checkIfCorrect = (question, chosenId) => {
-    checkAnswer(question, chosenId).then((data) => console.log("data: " + data))
-};
+    checkAnswer(question, chosenId).then((data) => setAnswerIsCorrect(data))
+}
 
-export default function Play({question}){
-
-    return(
+    return (
         <div>
             <QuestionsContainer>
-                <Question question={question} checkIfCorrect={checkIfCorrect}/>
+                <Question question={question} checkIfCorrect={checkIfCorrect} answerIsCorrect={answerIsCorrect} playNext={playNext} resetAnswers={resetAnswers}/>
             </QuestionsContainer>
         </div>
     )
@@ -30,4 +35,4 @@ const QuestionsContainer = styled.section`
   flex-wrap: wrap;
   background-color: #424B54;
   padding: 50px;
-  `
+`

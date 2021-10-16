@@ -30,22 +30,19 @@ public class QuestionController {
         return questionService.get(id);
     }
 
-    @GetMapping("/play")
-    public Question getQuestion(){
-        return questionService.getQuestion();
-    }
 
     @PostMapping()
     public Question addQuestion(@RequestBody Question newQuestion) {
         return questionService.addQuestion(newQuestion);
     }
 
-          //.post('/api/question/play', question, chosenId )
-            //Map<String, String> json
+    @GetMapping("/play")
+    public Question getQuestion() {
+        return questionService.getQuestion();
+    }
 
     @PostMapping("/play")
-    public boolean checkAnswer(@RequestBody FrontendTry frontendTry){
-        System.out.println("QuestionController: frontendTry" + frontendTry.toString());
+    public boolean checkAnswer(@RequestBody FrontendTry frontendTry) {
         return questionService.checkAnswer(frontendTry);
     }
 }

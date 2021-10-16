@@ -7,15 +7,14 @@ import de.neuefische.devquiz.repo.QuestionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class QuestionService {
 
     private final QuestionRepo questionRepo;
+    private List<Question> answeredQuestions = List.of();
+    int allQuestionsIndexForQuestionForFrontend = 0;
 
     @Autowired
     public QuestionService(QuestionRepo questionRepo) {
@@ -27,17 +26,14 @@ public class QuestionService {
     }
 
     public Question addQuestion(Question newQuestion) {
-        System.out.println(newQuestion);
         return questionRepo.save(newQuestion);
     }
 
     public Question get(String id) {
         Optional<Question> optionalQuestion = questionRepo.findById(id);
-
         if (optionalQuestion.isEmpty()) {
             throw new NoSuchElementException("Question with id:" + id + " not found!");
         }
-
         return optionalQuestion.get();
     }
 
@@ -46,19 +42,32 @@ public class QuestionService {
         if (allQuestions.size() == 0) {
             return null;
         }
+
+        Collections.shuffle(allQuestions);
+
+        for (Question answeredQuestion : answeredQuestions) {
+            if (answeredQuestion.equals(allQuestions.get(allQuestionsIndexForQuestionForFrontend))) {
+                allQuestionsIndexForQuestionForFrontend++;
+            } else {
+                return allQuestions.get(allQuestionsIndexForQuestionForFrontend);
+            }
+
+            if (allQuestionsIndexForQuestionForFrontend >= allQuestions.size()) {       //size-1?
+                allQuestionsIndexForQuestionForFrontend = 0;
+            }
+
+            if (answeredQuestions.size() >= allQuestions.size()) {
+                answeredQuestions.clear();
+            }
+        }
         return allQuestions.get(0);
     }
 
     public boolean checkAnswer(FrontendTry frontendTry) {
-
+        //Deconstruct FrontendTry-Objekt
         Question actualQuestion = frontendTry.getQuestion();
         String chosenId = frontendTry.getChosenId();
-        System.out.println("chosenId: " + chosenId);
-
-
         for (Answer answer : actualQuestion.getAnswers()) {
-            System.out.println("answer.getCorrect: " + answer.getCorrect());
-            System.out.println("answer.getID: " + answer.getId());
             if ((answer.getCorrect()) && (answer.getId().equals(chosenId))) {
                 return true;
             }

@@ -3,19 +3,23 @@ import Answer from './Answer'
 import styled from 'styled-components'
 import {useState} from "react";
 
-function Question({question, checkIfCorrect}) {
+function Question({question, checkIfCorrect, answerIsCorrect, playNext, resetAnswers}) {
 
     const [chosenId, setChosenId] = useState("123456")
 
     const handleClick = event => {
         event.preventDefault()
-        console.log("Checking if correct...:)")
-        console.log("Question : " +JSON.stringify(question))
         checkIfCorrect(question, chosenId)
     }
 
-    const sendChosenID = (id) => {setChosenId(id)}
-    console.log("chosenId: " +chosenId )
+    const sendChosenID = (id) => {
+        setChosenId(id)
+    }
+
+    const playNextQuestion = () => {
+        resetAnswers()
+        playNext()
+    }
 
     return (
         <QuestionContainer>
@@ -23,10 +27,19 @@ function Question({question, checkIfCorrect}) {
                 <h3>{question.questionText}</h3>
                 <AnswerContainer>
                     {question.answers.map(answer => (
-                        <Answer answer={answer} key={answer.id} questionId={question.id} sendChosenID={sendChosenID} />
+                        <Answer answer={answer} key={answer.id} questionId={question.id} sendChosenID={sendChosenID}/>
                     ))}
+
+                    {answerIsCorrect === undefined ? <div>Please chose an answer...</div> :
+                        answerIsCorrect === true ? <AnswerIsCorrect>Correct</AnswerIsCorrect> :
+                            <AnswerIsWrong>Wrong! Try again</AnswerIsWrong>}
+
                 </AnswerContainer>
                 <CheckButton>Check Answer</CheckButton>
+
+                {answerIsCorrect === undefined? <></> :
+                    answerIsCorrect === true ?<CheckButton onClick={playNextQuestion}>Next Question</CheckButton> :
+                        <></>}
             </form>
         </QuestionContainer>
     )
@@ -77,3 +90,12 @@ const CheckButton = styled.button`
     top: 1px;
   }
 `
+
+const AnswerIsCorrect = styled.div`
+  color: green;
+`
+const AnswerIsWrong = styled.div`
+  color: red;
+`
+
+
