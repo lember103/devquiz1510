@@ -13,8 +13,7 @@ import java.util.*;
 public class QuestionService {
 
     private final QuestionRepo questionRepo;
-    private List<Question> answeredQuestions = List.of();
-    int allQuestionsIndexForQuestionForFrontend = 0;
+
 
     @Autowired
     public QuestionService(QuestionRepo questionRepo) {
@@ -37,41 +36,5 @@ public class QuestionService {
         return optionalQuestion.get();
     }
 
-    public Question getQuestion() {
-        List<Question> allQuestions = questionRepo.findAll();
-        if (allQuestions.size() == 0) {
-            return null;
-        }
 
-        Collections.shuffle(allQuestions);
-
-        for (Question answeredQuestion : answeredQuestions) {
-            if (answeredQuestion.equals(allQuestions.get(allQuestionsIndexForQuestionForFrontend))) {
-                allQuestionsIndexForQuestionForFrontend++;
-            } else {
-                return allQuestions.get(allQuestionsIndexForQuestionForFrontend);
-            }
-
-            if (allQuestionsIndexForQuestionForFrontend >= allQuestions.size()) {       //size-1?
-                allQuestionsIndexForQuestionForFrontend = 0;
-            }
-
-            if (answeredQuestions.size() >= allQuestions.size()) {
-                answeredQuestions.clear();
-            }
-        }
-        return allQuestions.get(0);
-    }
-
-    public boolean checkAnswer(FrontendTry frontendTry) {
-        //Deconstruct FrontendTry-Objekt
-        Question actualQuestion = frontendTry.getQuestion();
-        String chosenId = frontendTry.getChosenId();
-        for (Answer answer : actualQuestion.getAnswers()) {
-            if ((answer.getCorrect()) && (answer.getId().equals(chosenId))) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
