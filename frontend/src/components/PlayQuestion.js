@@ -3,7 +3,8 @@ import {useState} from "react";
 
 export default function PlayQuestion(props) {
 
-    const [correctAnswerText, setCorrectAnswerText] = useState()
+    const [correctAnswerText, setCorrectAnswerText] = useState("")
+    const [radioIsChecked, setRadioIsChecked] = useState(false)
 
     const handleCheckButtonClick = () => {
         getQuestionById(props.playQuestion.id)
@@ -12,20 +13,18 @@ export default function PlayQuestion(props) {
             })
     }
 
-
-
     return (
         <>
             <h3>{props.playQuestion.questionText}</h3>
             {props.playQuestion.answers.map(answer => (
                 <div key={props.playQuestion.answers.indexOf(answer)}>
-                    <input type="radio" name="radio"/>
+                    <input type="radio" name="radio" onChange={checked => setRadioIsChecked(checked)}/>
                     <h4>{answer}</h4>
                 </div>
                 )
             )}
-            <button onClick={handleCheckButtonClick}>Check Answer</button>
-            {correctAnswerText && <h3>{correctAnswerText}</h3>}
+            {radioIsChecked && <button onClick={handleCheckButtonClick}>Check Answer</button>}
+            {radioIsChecked && correctAnswerText && <h3>{correctAnswerText}</h3>}
         </>
     )
 }

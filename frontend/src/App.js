@@ -16,6 +16,10 @@ function App() {
         getRandomQuestion().then(response => setPlayQuestion(response))
     }, [])
 
+    const handleNextButtonClick = () => {
+        getRandomQuestion().then(response => setPlayQuestion(response))
+    }
+
     return (
         <div className="App">
             <Header/>
@@ -28,6 +32,7 @@ function App() {
                 </Route>
                 <Route exact path="/play">
                     {playQuestion && <Play playQuestion={playQuestion}/>}
+                    <button onClick={handleNextButtonClick}>Next</button>
                 </Route>
             </Switch>
         </div>
