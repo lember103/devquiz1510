@@ -27,7 +27,7 @@ function App() {
                     <AddQuestion saveQuestion={saveQuestion}/>
                 </Route>
                 <Route exact path="/play">
-                    {playQuestion && <Play question={playQuestion}/>}
+                    {playQuestion && <Play playQuestion={playQuestion}/>}
                 </Route>
             </Switch>
         </div>

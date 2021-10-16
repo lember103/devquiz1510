@@ -20,3 +20,10 @@ export function getRandomQuestion() {
       .then(response => response.data)
       .catch(err => console.error(err))
 }
+
+export function getQuestionById(id) {
+  return axios
+      .get('/api/question/'+id)
+      .then(response => response.data)
+      .catch(err => console.error(err))
+}

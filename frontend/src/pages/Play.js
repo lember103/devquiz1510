@@ -4,7 +4,7 @@ export default function Play(props){
 
     return(
         <>
-            <PlayQuestion question={props.question}/>
+            <PlayQuestion playQuestion={props.playQuestion}/>
         </>
     )
 }
