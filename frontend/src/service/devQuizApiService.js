@@ -13,3 +13,10 @@ export function addQuestion(newQuestion) {
     .then(response => response.data)
     .catch(console.error)
 }
+
+export function getRandomQuestion() {
+  return axios
+      .get('/api/question/random')
+      .then(response => response.data)
+      .catch(err => console.error(err))
+}

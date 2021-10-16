@@ -1,6 +1,7 @@
 package de.neuefische.devquiz.repo;
 
 import de.neuefische.devquiz.model.Question;
+import org.bson.types.ObjectId;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

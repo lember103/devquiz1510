@@ -1,10 +1,13 @@
 package de.neuefische.devquiz.service;
 
+import de.neuefische.devquiz.model.Answer;
+import de.neuefische.devquiz.model.PlayQuestion;
 import de.neuefische.devquiz.model.Question;
 import de.neuefische.devquiz.repo.QuestionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -37,4 +40,39 @@ public class QuestionService {
 
         return optionalQuestion.get();
     }
+
+    public PlayQuestion getRandomPlayQuestion(){
+        List<Question> questions = getAllQuestions();
+        int randomIndex = (int)(Math.random() * questions.size());
+        Question randomQuestion = questions.get(randomIndex);
+        List<Answer> answers = randomQuestion.getAnswers();
+        List<String> answerTexts = new ArrayList<>();
+        for (Answer answer : answers) {
+            answerTexts.add(answer.getAnswerText());
+        }
+
+        PlayQuestion playQuestion = new PlayQuestion();
+        playQuestion.setId(randomQuestion.getId());
+        playQuestion.setQuestionText(randomQuestion.getQuestionText());
+        playQuestion.setAnswers(answerTexts);
+
+        return playQuestion;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
