@@ -14,8 +14,7 @@ function App() {
     const [playQuestion, setPlayQuestion] = useState()
     const [playNextQuestion, setPlayNextQuestion] = useState(false)
 
-    useEffect(()=>{getQuestion().
-        then(result => {setPlayQuestion(result)})}, [playNextQuestion]);
+    useEffect(()=>{getQuestion().then(result => {setPlayQuestion(result)})}, [playNextQuestion]);
 
     const playNext = () => setPlayNextQuestion(!(playNextQuestion));
 

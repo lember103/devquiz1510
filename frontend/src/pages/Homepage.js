@@ -1,5 +1,4 @@
 import * as React from 'react'
-import Question from '../components/Question'
 import styled from 'styled-components'
 import QuestionLight from "../components/QuestionLight";
 
