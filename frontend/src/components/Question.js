@@ -34,27 +34,3 @@ const AnswerContainer = styled.section`
     '. .'
     '. .';
 `
-const CheckButton = styled.button`
-  box-shadow: inset 0px 1px 0px 0px #ffffff;
-  background-color: #757780;
-  border-radius: 6px;
-  border: 1px solid #dcdcdc;
-  display: inline-block;
-  cursor: pointer;
-  color: white;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 15px;
-  font-weight: bold;
-  padding: 6px 24px;
-  text-decoration: none;
-
-  &:hover {
-    background: linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
-    background-color: #dfdfdf;
-    color: #757780;
-  }
-  &:active {
-    position: relative;
-    top: 1px;
-  }
-`
