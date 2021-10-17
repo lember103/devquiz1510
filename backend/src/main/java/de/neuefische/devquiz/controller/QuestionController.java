@@ -37,7 +37,7 @@ public class QuestionController {
     }
 
     @GetMapping("/random")
-    public PlayQuestion getRandomQuestion(){
-        return questionService.getRandomPlayQuestion();
+    public PlayQuestion getRandomPlayQuestion(){
+        return questionService.createRandomPlayQuestion();
     }
 }

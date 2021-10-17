@@ -41,16 +41,23 @@ public class QuestionService {
         return optionalQuestion.get();
     }
 
-    public PlayQuestion getRandomPlayQuestion(){
-        List<Question> questions = getAllQuestions();
+    public PlayQuestion createRandomPlayQuestion(){
+        // get all questions from repo
+        List<Question> questions = questionRepo.findAll();
+        if (questions.size() == 0){
+            throw new NoSuchElementException("No questions in repo");
+        }
+        // get random question
         int randomIndex = (int)(Math.random() * questions.size());
         Question randomQuestion = questions.get(randomIndex);
+        // get answers from random question
         List<Answer> answers = randomQuestion.getAnswers();
+        // save answers in new list
         List<String> answerTexts = new ArrayList<>();
         for (Answer answer : answers) {
             answerTexts.add(answer.getAnswerText());
         }
-
+        // create new playQuestion
         PlayQuestion playQuestion = new PlayQuestion();
         playQuestion.setId(randomQuestion.getId());
         playQuestion.setQuestionText(randomQuestion.getQuestionText());
@@ -58,6 +65,7 @@ public class QuestionService {
 
         return playQuestion;
     }
+
 }
 
 

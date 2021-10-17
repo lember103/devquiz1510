@@ -1,11 +1,14 @@
 package de.neuefische.devquiz.service;
 
+import de.neuefische.devquiz.model.Answer;
+import de.neuefische.devquiz.model.PlayQuestion;
 import de.neuefische.devquiz.model.Question;
 import de.neuefische.devquiz.repo.QuestionRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -58,4 +61,46 @@ class QuestionServiceTest {
         assertEquals(expected, actual);
         verify(questionRepo).save(expected);
     }
+
+    @Test
+    void testGetRandomPlayQuestion_NoQuestionsInRepo(){
+        //GIVEN
+        //WHEN
+        when(questionRepo.findAll()).thenReturn(new ArrayList<>());
+
+        //THEN
+        Assertions.assertThrows(
+                NoSuchElementException.class,
+                questionService::createRandomPlayQuestion
+        );
+    }
+
+    @Test
+    void testGetRandomPlayQuestion(){
+        //GIVEN
+        Answer answer = new Answer("0", "answer", true);
+        Question question = new Question(
+                "999",
+                "Frage?",
+                List.of(answer));
+
+
+        //WHEN
+        when(questionRepo.findAll()).thenReturn(new ArrayList<>(List.of(question)));
+        PlayQuestion actual = questionService.createRandomPlayQuestion();
+
+        //THEN
+        Assertions.assertEquals(PlayQuestion.class, actual.getClass());
+    }
+
 }
+
+
+
+
+
+
+
+
+
+

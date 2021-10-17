@@ -8,10 +8,9 @@ function Question({ question }) {
       <h3>{question.questionText}</h3>
       <AnswerContainer>
         {question.answers.map(answer => (
-          <Answer answer={answer} key={answer.id} questionId={question.id} />
+          <Answer answer={answer} key={question.answers.indexOf(answer)} questionId={question.id} />
         ))}
       </AnswerContainer>
-      <CheckButton>Check Answer</CheckButton>
     </QuestionContainer>
   )
 }
