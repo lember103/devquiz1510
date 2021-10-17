@@ -24,7 +24,7 @@ public class PlayController {
     }
 
     @PostMapping()
-    public boolean checkAnswer(@RequestBody FrontendTry frontendTry) {
+    public Boolean checkAnswer(@RequestBody FrontendTry frontendTry) {
         return playService.checkAnswer(frontendTry);
     }
 }
